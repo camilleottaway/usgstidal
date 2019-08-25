@@ -1,0 +1,30 @@
+.ColorBar {
+  position: fixed;
+  z-index: 5;
+  right: 0;
+  top: 10vh;
+  background-color: white;
+  border: solid #dddddd 1px;
+  padding:10px;
+  width: 80px;
+  border-radius: 6px;
+}
+
+.label{
+  position: absolute;
+  left: 45px;
+  margin-top: 20px;
+}
+
+.swatch{
+  width: 30px;
+  height: 30px;
+}
+
+.swatch:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.swatch:last-child {
+  border-radius: 0 0 6px 6px;
+}

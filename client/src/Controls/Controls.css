@@ -1,0 +1,52 @@
+.Controls{
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  width: 100vw;
+  height: 100px;
+}
+.slider{
+  width: 700px;
+}
+
+.disClock{
+  width: 200px;
+}
+
+.layerbtn{
+  width: 100px;
+  height: 30px;
+  border-radius: 6px;
+  border-width: 0px;
+  background-color: #00a4db;
+  
+  /*border-bottom-color: aquamarine;*/
+  margin-right: 1px;
+  margin-left: 5px;
+  margin-top: 2px;
+  font-weight: bold;
+  color: white;
+}
+
+.selected{
+  background-color: #003F87;
+}
+
+.exitbtn{
+  color: rgb(59, 59, 59);
+  background-color: white;
+  border: solid #dddddd 1px;
+}
+
+.ControlArea{
+  background-color: whitesmoke;
+  height: 100%;  
+}
+
+.exitbtnholder{
+  text-align: center;
+  padding: 2px;
+  position: absolute;
+  top: -50px;
+  width: 100%;
+}

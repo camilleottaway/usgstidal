@@ -1,0 +1,46 @@
+{
+    "dataSetId": 20180127060000,
+    "startDateTime": "??-what does date object look like",
+    "forecastHours": 24,
+    "SpatialDomains": [{
+      "siteDisplayName": "Bellingham Bay",
+      "data": [{
+          "fileName": "bellinghamwind.mat",
+          "dataType": "Wind",
+          "dataFormat": ".mat"
+        },
+        {
+          "fileName": "bellinghamWave.mat",
+          "dataType": "Wave",
+          "dataFormat": ".mat"
+        }
+      ],
+      "NEpoint": [48.7862, -122.3994],
+      "SWpoint": [48.5487, -122.7017]
+    }],
+    "PointLocations": [{
+        "siteDisplayName": "Bellingham",
+        "data": [{
+          "fileName": "9449211_twlpred.csv",
+          "dataType": "TidePred",
+          "dataFormat": ".csv"
+        }],
+        "Location": [48.7450, -122.4950]
+      },
+      {
+        "siteDisplayName": "Port Townsend",
+        "data": [{
+            "fileName": "9444900_twlpred.csv",
+            "dataType": "TidePred",
+            "dataFormat": ".csv"
+          },
+          {
+            "fileName": "9444900_twlobs.csv",
+            "dataType": "TideObs",
+            "dataFormat": ".csv"
+          }
+        ],
+        "Location": [48.1133, -122.7600]
+      }
+    ]
+  }

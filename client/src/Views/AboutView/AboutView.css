@@ -1,0 +1,27 @@
+.AboutView{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.Text{
+    margin: 20px;
+}
+
+.Logo{
+    margin-left: 30px;
+    max-width: 300px;    
+}
+
+.ref-link:link{
+    color: #003F87;
+}
+
+.ref-link:visited{
+    color: #003F87;
+}
+
+.ref-link:hover{
+  background-color: transparent;
+  text-decoration: underline;
+}
+

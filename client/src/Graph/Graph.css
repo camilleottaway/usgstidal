@@ -1,0 +1,61 @@
+.popup_container{
+  position: fixed;
+  width: auto;
+  height: auto;
+  background-image: linear-gradient(to bottom right, lightblue, blue) !important;
+  z-index: 100;
+  padding: 5px 10px;
+  border: 1px solid grey;
+  border-radius: 15px;
+}
+
+.popup_inner p{
+  text-align: center;
+}
+
+.popup_button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 2px 5px;
+  
+}
+
+.graph_container {
+  padding: 5px;
+}
+
+.modal{
+  font-size: 12px;
+  
+}
+
+.modal > .header{
+  width: auto;/*100%;*/
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+}
+.modal > .content {
+  width: auto;/*100%;*/
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}

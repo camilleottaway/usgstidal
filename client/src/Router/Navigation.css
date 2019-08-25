@@ -1,0 +1,49 @@
+.Nav{
+  z-index: 5;
+  position: fixed;
+  color: white;
+  background-color: #003F87;
+  width: 100px;
+  top: 0;
+  padding: 7px;
+  border-radius: 0 0 10px 0;  
+}
+.Nav a{
+  text-decoration: none;
+  color: white;
+}
+
+.Nav li{
+  
+  color: white;
+}
+
+
+a:visited { 
+  color: white;
+}
+
+.Nav .activeRoute{
+  font-weight: bolder;
+}
+
+.NavLogo {
+  max-width: 70px;
+  margin: 0 10px 0 10px;
+}
+
+
+.logobox{
+  margin: auto;
+  text-align: center;
+  top: 0;
+  
+  right: 0;
+  position: fixed;
+  z-index: 5;
+  width: 200px;
+  height: 40px;
+  background-color: #003F87;
+  padding: 15px;
+  border-radius:  0 0 0 10px ;
+}

@@ -1,0 +1,255 @@
+{
+  "dataSetId": 20190305060000,
+  "startDateTime": "2019-03-05 06:00:00",
+  "forecastHours": 48,
+  "SpatialDomains": [{
+    "siteDisplayName": "Bellingham Bay",
+    "data": [{
+        "fileName": "bellinghamWave.mat",
+        "dataType": "Wave",
+        "dataFormat": ".mat"
+      }
+    ],
+    "NEpoint": [48.786233,-122.399424],
+    "SWpoint": [48.548654,-122.701661]
+  },
+  {
+    "siteDisplayName": "Port Susan",
+    "data": [{
+        "fileName": "portsusanWave.mat",
+        "dataType": "Wave",
+        "dataFormat": ".mat"
+      }
+    ],
+    "NEpoint": [47.944947,-122.494903],
+    "SWpoint": [48.245150,-122.182915]
+  },
+  {
+    "siteDisplayName": "Skagit Delta",
+    "data": [{
+        "fileName": "skagitWave.mat",
+        "dataType": "Wave",
+        "dataFormat": ".mat"
+      }
+    ],
+    "NEpoint": [48.237028,-122.646067],
+    "SWpoint": [48.457131,-122.323115]
+  }],
+  "PointLocations": [{
+      "siteDisplayName": "Bellingham Bay Tides",
+      "data": [{
+        "fileName": "9449211_twlpred.csv",
+        "dataType": "TidePred",
+        "dataFormat": ".csv"
+      }],
+      "Location": [48.7450, -122.4950]
+    },
+    {
+      "siteDisplayName": "Sneeoosh Point Tides",
+      "data": [{
+        "fileName": "9448576_twlpred.csv",
+        "dataType": "TidePred",
+        "dataFormat": ".csv"
+      }],
+      "Location": [48.4000,-122.548333]
+    },
+    {
+      "siteDisplayName": "Kayak Point Tides",
+      "data": [{
+        "fileName": "9448043_twlpred.csv",
+        "dataType": "TidePred",
+        "dataFormat": ".csv"
+      }],
+      "Location": [48.1366667,-122.366667]
+    },
+    {
+      "siteDisplayName": "Nisqually Tides",
+      "data": [{
+        "fileName": "9446828_twlpred.csv",
+        "dataType": "TidePred",
+        "dataFormat": ".csv"
+      }],
+      "Location": [47.1183,-122.665]
+    },
+    {
+      "siteDisplayName": "Tacoma Tides",
+      "data": [{
+          "fileName": "9446484_twlpred.csv",
+          "dataType": "TidePred",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9446484_twlobs.csv",
+          "dataType": "TideObs",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [47.2667,-122.4133]
+    },
+    {
+      "siteDisplayName": "Seattle Tides",
+      "data": [{
+          "fileName": "9447130_twlpred.csv",
+          "dataType": "TidePred",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9447130_twlobs.csv",
+          "dataType": "TideObs",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [47.6206,-122.3393]
+    },
+    {
+      "siteDisplayName": "Port Townsend Tides",
+      "data": [{
+          "fileName": "9444900_twlpred.csv",
+          "dataType": "TidePred",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9444900_twlobs.csv",
+          "dataType": "TideObs",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [48.1133, -122.7600]
+    },
+    {
+      "siteDisplayName": "Cherry Point Tides",
+      "data": [{
+          "fileName": "9449424_twlpred.csv",
+          "dataType": "TidePred",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9449424_twlobs.csv",
+          "dataType": "TideObs",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [48.8633333333,-122.758333333]
+    },
+    {
+      "siteDisplayName": "Port Townsend Winds",
+      "data": [{
+          "fileName": "9444900_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9444900_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [48.1129,-122.7595]
+    },
+    {
+      "siteDisplayName": "Toke Point Winds",
+      "data": [{
+          "fileName": "9440910_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9440910_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [46.7083333333,-123.966666667]
+    },
+    {
+      "siteDisplayName": "La Push Winds",
+      "data": [{
+          "fileName": "9442396_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9442396_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [47.9133333333,-124.636666667]
+    },
+    {
+      "siteDisplayName": "West Port Winds",
+      "data": [{
+          "fileName": "9441102_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9441102_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [46.9033333333,-124.105]
+    },
+    {
+      "siteDisplayName": "Friday Harbor Winds",
+      "data": [{
+          "fileName": "9449880_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9449880_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [48.545,-123.013333333]
+    },
+    {
+      "siteDisplayName": "Cherry Point Winds",
+      "data": [{
+          "fileName": "9449424_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9449424_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [48.8633333333,-122.758333333]
+    },
+    {
+      "siteDisplayName": "Port Angeles Winds",
+      "data": [{
+          "fileName": "9444090_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9444090_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [48.125,-123.441666667]
+    },
+    {
+      "siteDisplayName": "Tacoma Winds",
+      "data": [{
+          "fileName": "9446482_wind_obs.csv",
+          "dataType": "WindObs",
+          "dataFormat": ".csv"
+        },
+        {
+          "fileName": "9446482_pred_obs.csv",
+          "dataType": "WindPred",
+          "dataFormat": ".csv"
+        }
+      ],
+      "Location": [47.2766666667,-122.418333333]
+    }         
+  ]
+}
