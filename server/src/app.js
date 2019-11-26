@@ -1,30 +1,32 @@
-const  express = require('express');
-const compression = require('compression');
+const express = require("express");
+const compression = require("compression");
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
 
-const {staticFilesSetup } = require('./static-files');
-const SiteDataRouter = require('./site-data.router');
-
+const { staticFilesSetup } = require("./static-files");
+const SiteDataRouter = require("./site-data.router");
+const env = require("./env.json");
 
 const app = express();
 const port = 8080;
 
-const ADMINKEY = process.env.usgstidalapiadminkey;
-if (!ADMINKEY || ADMINKEY === ""){
-    console.log("error: environment variable of: \"usgstidalapiadminkey\" is not setup. Please add this to your bash envrioment");
-    process.exit(1);
+const ADMINKEY = process.env.usgstidalapiadminkey || env.usgstidalapiadminkey;
+if (!ADMINKEY || ADMINKEY === "") {
+  console.log(
+    'error: environment variable of: "usgstidalapiadminkey" is not setup. Please add this to your bash envrioment'
+  );
+  process.exit(1);
 }
 
 //config
 app.use(cors());
 app.use(compression());
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
 
 //Site data
 //setupManifestDataRoutes(app);
-app.use(SiteDataRouter)
+app.use(SiteDataRouter);
 
 //Serve website
 // This needs to be the last item as it has a catch all rules
