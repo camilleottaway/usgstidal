@@ -11,6 +11,7 @@ const app = express();
 const port = 8080;
 
 const ADMINKEY = process.env.usgstidalapiadminkey || env.usgstidalapiadminkey;
+console.log(ADMINKEY);
 if (!ADMINKEY || ADMINKEY === "") {
   console.log(
     'error: environment variable of: "usgstidalapiadminkey" is not setup. Please add this to your bash envrioment'

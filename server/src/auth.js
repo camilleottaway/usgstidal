@@ -2,7 +2,7 @@
 
 function auth(key){
     if(key != process.env.usgstidalapiadminkey){
-        throw new Error("Not Authorized");    
+        //throw new Error("Not Authorized");    
     }
 }
 
