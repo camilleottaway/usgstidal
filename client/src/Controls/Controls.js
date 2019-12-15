@@ -7,7 +7,9 @@ import Clock from 'react-live-clock';
 import moment from 'moment';
 import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
+import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
+import { requestPointLocationData } from '../Services/PointLocationData';
 
 export class Controls extends Component {
 
@@ -24,16 +26,33 @@ export class Controls extends Component {
     console.log(layerName);
   }
 
-  getDateLabel = (h)=>{
-    let date = new moment();
-    date.add(h, 'h');
-    return date.format('MMMM D, YYYY ha');
-  }
+  // getDateLabel = (h)=>{
+    
+  //     <Subscribe to={[ManifestService]}>
+  //       {manifest => (
+        
+  //        date =  {manifest.state.data.date}
+         
+         
+  //        //date.add(h, 'h');
+  //        //return date.format('MMMM D, YYYY ha');
+         
+  //        )}
+    
+  //      </Subscribe>
+
+  //  );
+    //let date = manifest.state.data.date;
+    //date.add(h, 'h');
+    //return date.format('MMMM D, YYYY ha');
+ // }
+
+ 
 
   render() {
     return (
-      <Subscribe to={[MapService]}>
-        {mapService => (
+      <Subscribe to={[ManifestService, MapService]}>
+        {(manifest, mapService) => (
           <div>
             <ColorBar
               className="ColorBarPos"
@@ -110,9 +129,10 @@ export class Controls extends Component {
                       <div className="slider">
                         <InputRange
                           maxValue={47}
-                          minValue={0}
+                          minValue={manifest.state.data.startDateTime}
                           value={mapService.state.time}
-                          formatLabel={this.getDateLabel}
+                          
+                          //formatLabel={manifest.state.data.startDateTime}
                           onChange={value => mapService.adjustTime(value)}
                         />
                       </div>
