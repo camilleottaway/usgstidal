@@ -9,6 +9,7 @@ export class ManifestService extends Container {
 
     state = {
       data: {},
+      date: 0,
       spatialDomainsSites: [],
       pointLocationsSites: [],
       fetched: false,
@@ -25,7 +26,11 @@ export class ManifestService extends Container {
           process.env.REACT_APP_API_URL + "/manifest",
           { maxContentLength: 200000 }
         );
+
+        console.log({data: response.data.startDateTime})
+    
         this.setState({data: response.data})
+        this.setState({ date: response.data.startDateTime }) //line added
         this.setState({ spatialDomainsSites: response.data.SpatialDomains })
         this.setState({ pointLocationsSites: response.data.PointLocations })
         this.setState({fetched: true})
