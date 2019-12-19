@@ -26,26 +26,12 @@ export class Controls extends Component {
     console.log(layerName);
   }
 
-  // getDateLabel = (h)=>{
+  getDateLabel = (h)=>{
     
-  //     <Subscribe to={[ManifestService]}>
-  //       {manifest => (
-        
-  //        date =  {manifest.state.data.date}
-         
-         
-  //        //date.add(h, 'h');
-  //        //return date.format('MMMM D, YYYY ha');
-         
-  //        )}
-    
-  //      </Subscribe>
-
-  //  );
-    //let date = manifest.state.data.date;
-    //date.add(h, 'h');
-    //return date.format('MMMM D, YYYY ha');
- // }
+    let date = new moment("2019-10-28 06:00:00"); //TODO: Read from the manifest file here
+    date.add(h, 'h');
+    return date.format('MMMM D, YYYY ha');
+  }
 
  
 
@@ -129,10 +115,11 @@ export class Controls extends Component {
                       <div className="slider">
                         <InputRange
                           maxValue={47}
-                          minValue={manifest.state.data.startDateTime}
+                          minValue={0}
                           value={mapService.state.time}
-                          
-                          //formatLabel={manifest.state.data.startDateTime}
+                          startTime={ manifest.state.data.startDateTime}
+                          // formatLabel={startTime => this.getDateLabel()}
+                          formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
                         />
                       </div>
