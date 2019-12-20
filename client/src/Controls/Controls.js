@@ -17,6 +17,7 @@ export class Controls extends Component {
     "wind": true,
     "wave": true,
     "pressure": true,
+    startDate : "2019-10-28 06:00:00",
   }
 
   toggleLayer = (layerName) =>{
@@ -27,10 +28,21 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
-    
-    let date = new moment("2019-10-28 06:00:00"); //TODO: Read from the manifest file here
+    console.log("getting date label from " + this.state.startDate + ".");
+    let date = new moment(this.state.startDate); //TODO: Read from the manifest file here
+    // console.log(date);
     date.add(h, 'h');
     return date.format('MMMM D, YYYY ha');
+  }
+
+  //Sets the date using the value in the manifest file
+  setDate = (startDateTime) => {
+
+    console.log("Setting date : " + startDateTime + ".");
+    this.setState({startDate : startDateTime});
+
+    console.log(this.state.startDate);
+    
   }
 
  
@@ -117,8 +129,12 @@ export class Controls extends Component {
                           maxValue={47}
                           minValue={0}
                           value={mapService.state.time}
-                          startTime={ manifest.state.data.startDateTime}
-                          // formatLabel={startTime => this.getDateLabel()}
+
+                          // var newState = {0}
+                          // newState ={ manifest.state.data }
+
+                          onChange={newState => this.setDate(manifest.state.data.startDateTime)}
+                          // formatLabel={startTime => this.getDateLabel( startTime ,startTime)}
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
                         />
