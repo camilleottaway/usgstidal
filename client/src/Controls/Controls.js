@@ -9,7 +9,7 @@ import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
 import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
-import { requestPointLocationData } from '../Services/PointLocationData';
+// import { requestPointLocationData } from '../Services/PointLocationData';
 
 export class Controls extends Component {
 
@@ -17,7 +17,8 @@ export class Controls extends Component {
     "wind": true,
     "wave": true,
     "pressure": true,
-    startDate : "2019-10-28 06:00:00",
+    startDate : "",
+    dateSet : false,
   }
 
   toggleLayer = (layerName) =>{
@@ -28,19 +29,21 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
-    console.log("getting date label from " + this.state.startDate + ".");
+
+    console.log("creating date object from " + this.state.startDate + ".");
     let date = new moment(this.state.startDate); //TODO: Read from the manifest file here
-    // console.log(date);
     date.add(h, 'h');
     return date.format('MMMM D, YYYY ha');
+
   }
 
   //Sets the date using the value in the manifest file
-  setDate = (startDateTime) => {
-
+  setDate = (manifest) => {
+    let startDateTime = manifest.state.data;
     console.log("Setting date : " + startDateTime + ".");
     this.setState({startDate : startDateTime});
-
+    // this.setState({startDate : "2019-10-28 06:00:00"});
+    this.setState({ dateSet : true });
     console.log(this.state.startDate);
     
   }
@@ -125,16 +128,15 @@ export class Controls extends Component {
                   <Column horizontal="center">
                     <Row horizontal="center" vertical="center">
                       <div className="slider">
+                        if(!this.dateSet){
+                          this.setDate(manifest)
+                        }
                         <InputRange
                           maxValue={47}
                           minValue={0}
                           value={mapService.state.time}
 
-                          // var newState = {0}
-                          // newState ={ manifest.state.data }
-
-                          onChange={newState => this.setDate(manifest.state.data.startDateTime)}
-                          // formatLabel={startTime => this.getDateLabel( startTime ,startTime)}
+                          // onChange={newState => this.setDate(manifest.state.data.startDateTime)}
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
                         />
@@ -150,3 +152,4 @@ export class Controls extends Component {
     );
   }
 }
+

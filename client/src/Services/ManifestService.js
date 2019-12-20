@@ -9,7 +9,6 @@ export class ManifestService extends Container {
 
     state = {
       data: {},
-      date: 0,
       spatialDomainsSites: [],
       pointLocationsSites: [],
       fetched: false,
@@ -30,7 +29,8 @@ export class ManifestService extends Container {
         console.log({data: response.data.startDateTime})
     
         this.setState({data: response.data})
-        this.setState({ date: response.data.startDateTime }) //line added
+        // this.setState({ date: response.data.startDateTime }) //line added
+        this.setState({ data: response.data.startDateTime })
         this.setState({ spatialDomainsSites: response.data.SpatialDomains })
         this.setState({ pointLocationsSites: response.data.PointLocations })
         this.setState({fetched: true})
