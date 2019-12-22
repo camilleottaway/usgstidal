@@ -13,11 +13,13 @@ import { ColorBar } from './ColorBar';
 
 export class Controls extends Component {
 
+  
+
   state = {
     "wind": true,
     "wave": true,
     "pressure": true,
-    startDate : "",
+    startDate : '',
     dateSet : false,
   }
 
@@ -37,17 +39,15 @@ export class Controls extends Component {
 
   }
 
-  //Sets the date using the value in the manifest file
+  //This will only run once, could be a problem if manifest.json is updated
   setDate = (manifest) => {
-    let startDateTime = manifest.state.data;
-    console.log("Setting date : " + startDateTime + ".");
-    this.setState({startDate : startDateTime});
-    // this.setState({startDate : "2019-10-28 06:00:00"});
-    this.setState({ dateSet : true });
-    console.log(this.state.startDate);
-    
-  }
 
+    this.setState({ dateSet : true });
+    const startDateTime = manifest.state.data;
+    // console.log(startDateTime);
+    this.setState({startDate : startDateTime});
+
+  }
  
 
   render() {
@@ -128,7 +128,12 @@ export class Controls extends Component {
                   <Column horizontal="center">
                     <Row horizontal="center" vertical="center">
                       <div className="slider">
-                        if(!this.dateSet){
+                        {/* if(!this.dateSet){
+                          this.setDate(manifest)
+                        } */}
+                        {this.dateSet ?  
+                          null
+                         : 
                           this.setDate(manifest)
                         }
                         <InputRange
