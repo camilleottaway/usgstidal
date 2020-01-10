@@ -7,7 +7,10 @@ import Clock from 'react-live-clock';
 import moment from 'moment';
 import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
+import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
+// import { requestPointLocationData } from '../Services/PointLocationData';
+
 
 export class Controls extends Component {
 
@@ -15,7 +18,11 @@ export class Controls extends Component {
     "wind": true,
     "wave": true,
     "pressure": true,
+    startDate : '',
+    dateSet : false,
+    dateObject : null,
   }
+
 
   toggleLayer = (layerName) =>{
     //fill out this function.
@@ -25,15 +32,28 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
-    let date = new moment();
-    date.add(h, 'h');
-    return date.format('MMMM D, YYYY ha');
+
+      let date = new moment(this.state.startDate); 
+      date.add(h, 'h');
+      return date.format('MMMM D, YYYY ha');
   }
 
+  //Sets the date state, for use in getDateLAbel
+  setDate = (manifestDate) => {
+  
+    if(this.state.startDate !== manifestDate){
+      console.log('setting date to: ' + manifestDate);
+      this.setState({startDate : manifestDate});
+    }
+  }
+
+
   render() {
+    // const manifestDate = window.manifestDate;
     return (
-      <Subscribe to={[MapService]}>
-        {mapService => (
+      <Subscribe to={[ManifestService, MapService]}>
+        {(manifest, mapService) => (
+          
           <div>
             <ColorBar
               className="ColorBarPos"
@@ -41,6 +61,7 @@ export class Controls extends Component {
             />
             {mapService.state.navMode ? null : (
               <div className="Controls">
+                
                 <div className="exitbtnholder">
                   <button
                     className="layerbtn exitbtn"
@@ -102,16 +123,23 @@ export class Controls extends Component {
                   </button> */}
                   <Column horizontal="end">
                     <div className="disClock">
+                      
                       <Clock format={"MMMM D, YYYY ha"} ticking={true} />
                     </div>
                   </Column>
                   <Column horizontal="center">
                     <Row horizontal="center" vertical="center">
                       <div className="slider">
+
                         <InputRange
+
                           maxValue={47}
                           minValue={0}
+
                           value={mapService.state.time}
+                          
+                          manifestDate={this.setDate(manifest.state.date)}
+
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
                         />
@@ -127,3 +155,4 @@ export class Controls extends Component {
     );
   }
 }
+
