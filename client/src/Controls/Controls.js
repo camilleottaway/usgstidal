@@ -33,22 +33,19 @@ export class Controls extends Component {
 
   getDateLabel = (h)=>{
 
-    // console.log("h is ->" + h + "Type is -> " + typeof(h));
-    // if (typeof(h) === "number"){
-      let date = new moment(h); // eslint-disable-line
+      let date = new moment(this.state.startDate); 
       date.add(h, 'h');
       return date.format('MMMM D, YYYY ha');
-    // }
   }
 
-  // //This may only run once, could be a problem if manifest.json is updated
-  // setDate = (manifestDate) => {
+  //Sets the date state, for use in getDateLAbel
+  setDate = (manifestDate) => {
   
-  //   if(this.state.startDate !== manifestDate){
-  //     console.log('setting date to: ' + manifestDate);
-  //     this.setState({startDate : manifestDate});
-  //   }
-  // }
+    if(this.state.startDate !== manifestDate){
+      console.log('setting date to: ' + manifestDate);
+      this.setState({startDate : manifestDate});
+    }
+  }
 
 
   render() {
@@ -141,16 +138,9 @@ export class Controls extends Component {
 
                           value={mapService.state.time}
                           
-                          // temp={this.setDate(manifest.state.data.startDateTime)}
-                          // manifestDate = {manifest.state.data.startDateTime} //This doesn't work asynchronously
-                                                  
+                          manifestDate={this.setDate(manifest.state.date)}
 
-                          // onChange={newState => this.setDate(manifest.state.data.startDateTime)}
-                          manifestDate={manifest.state.date}
-                          temp={console.log("date -> " + manifest.state.date)}
-                                                    
-                          formatLabel={manifestDate => this.getDateLabel(manifest.state.date)} //Pass the string here somehow?
-
+                          formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
                         />
                       </div>
