@@ -11,9 +11,8 @@ import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
 // import { requestPointLocationData } from '../Services/PointLocationData';
 
-export class Controls extends Component {
 
-  
+export class Controls extends Component {
 
   state = {
     "wind": true,
@@ -21,7 +20,9 @@ export class Controls extends Component {
     "pressure": true,
     startDate : '',
     dateSet : false,
+    dateObject : null,
   }
+
 
   toggleLayer = (layerName) =>{
     //fill out this function.
@@ -32,28 +33,30 @@ export class Controls extends Component {
 
   getDateLabel = (h)=>{
 
-    console.log("creating date object from " + this.state.startDate + ".");
-    let date = new moment(this.state.startDate); //TODO: Read from the manifest file here
-    date.add(h, 'h');
-    return date.format('MMMM D, YYYY ha');
-
+    // console.log("h is ->" + h + "Type is -> " + typeof(h));
+    // if (typeof(h) === "number"){
+      let date = new moment(h); // eslint-disable-line
+      date.add(h, 'h');
+      return date.format('MMMM D, YYYY ha');
+    // }
   }
 
-  //This will only run once, could be a problem if manifest.json is updated
-  setDate = (manifest) => {
+  // //This may only run once, could be a problem if manifest.json is updated
+  // setDate = (manifestDate) => {
+  
+  //   if(this.state.startDate !== manifestDate){
+  //     console.log('setting date to: ' + manifestDate);
+  //     this.setState({startDate : manifestDate});
+  //   }
+  // }
 
-    this.setState({ dateSet : true });
-    const startDateTime = manifest.state.data;
-    // console.log(startDateTime);
-    this.setState({startDate : startDateTime});
-
-  }
- 
 
   render() {
+    // const manifestDate = window.manifestDate;
     return (
       <Subscribe to={[ManifestService, MapService]}>
         {(manifest, mapService) => (
+          
           <div>
             <ColorBar
               className="ColorBarPos"
@@ -61,6 +64,7 @@ export class Controls extends Component {
             />
             {mapService.state.navMode ? null : (
               <div className="Controls">
+                
                 <div className="exitbtnholder">
                   <button
                     className="layerbtn exitbtn"
@@ -122,27 +126,31 @@ export class Controls extends Component {
                   </button> */}
                   <Column horizontal="end">
                     <div className="disClock">
+                      
                       <Clock format={"MMMM D, YYYY ha"} ticking={true} />
                     </div>
                   </Column>
                   <Column horizontal="center">
                     <Row horizontal="center" vertical="center">
                       <div className="slider">
-                        {/* if(!this.dateSet){
-                          this.setDate(manifest)
-                        } */}
-                        {this.dateSet ?  
-                          null
-                         : 
-                          this.setDate(manifest)
-                        }
+
                         <InputRange
+
                           maxValue={47}
                           minValue={0}
+
                           value={mapService.state.time}
+                          
+                          // temp={this.setDate(manifest.state.data.startDateTime)}
+                          // manifestDate = {manifest.state.data.startDateTime} //This doesn't work asynchronously
+                                                  
 
                           // onChange={newState => this.setDate(manifest.state.data.startDateTime)}
-                          formatLabel={this.getDateLabel}
+                          manifestDate={manifest.state.date}
+                          temp={console.log("date -> " + manifest.state.date)}
+                                                    
+                          formatLabel={manifestDate => this.getDateLabel(manifest.state.date)} //Pass the string here somehow?
+
                           onChange={value => mapService.adjustTime(value)}
                         />
                       </div>

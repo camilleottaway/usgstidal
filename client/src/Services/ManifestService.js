@@ -14,7 +14,8 @@ export class ManifestService extends Container {
       fetched: false,
       sites: {},
       currentSiteData: {},
-      loadingCurrentSite: false,      
+      loadingCurrentSite: false,    
+      date: '',  
     }
 
 
@@ -26,11 +27,10 @@ export class ManifestService extends Container {
           { maxContentLength: 200000 }
         );
 
-        console.log({data: response.data.startDateTime})
+        // console.log({data: response.data.startDateTime})
     
         this.setState({data: response.data})
-        // this.setState({ date: response.data.startDateTime }) //line added
-        this.setState({ data: response.data.startDateTime })
+        this.setState({ date: response.data.startDateTime })
         this.setState({ spatialDomainsSites: response.data.SpatialDomains })
         this.setState({ pointLocationsSites: response.data.PointLocations })
         this.setState({fetched: true})
