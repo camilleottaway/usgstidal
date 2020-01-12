@@ -19,8 +19,6 @@ export class Controls extends Component {
     "wave": true,
     "pressure": true,
     startDate : '',
-    dateSet : false,
-    dateObject : null,
   }
 
 
@@ -38,7 +36,7 @@ export class Controls extends Component {
       return date.format('MMMM D, YYYY ha');
   }
 
-  //Sets the date state, for use in getDateLAbel
+  //Sets the date state, for use in getDateLabel
   setDate = (manifestDate) => {
   
     if(this.state.startDate !== manifestDate){
@@ -49,7 +47,6 @@ export class Controls extends Component {
 
 
   render() {
-    // const manifestDate = window.manifestDate;
     return (
       <Subscribe to={[ManifestService, MapService]}>
         {(manifest, mapService) => (
