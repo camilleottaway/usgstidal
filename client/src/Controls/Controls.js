@@ -138,7 +138,7 @@ export class Controls extends Component {
 
                           value={mapService.state.time}
                           
-                          manifestDate={this.setDate(manifest.state.date)}
+                          name={this.setDate(manifest.state.date)}
 
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
