@@ -30,10 +30,16 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
+    var d = new Date()
+    var n = d.getTimezoneOffset();
+    
+    let date = new moment(this.state.startDate); 
+    date.add(-n, 'm');
 
-      let date = new moment(this.state.startDate); 
-      date.add(h, 'h');
-      return date.format('MMMM D, YYYY ha');
+    date.add(h, 'h');
+    return date.format('MMMM D, YYYY ha');
+
+    
   }
 
   //Sets the date state, for use in getDateLabel
