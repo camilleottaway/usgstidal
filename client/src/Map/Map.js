@@ -85,7 +85,7 @@ class MapComponent extends Component {
     
     if (map.state.navMode) {
       layers = [
-        SwellLayer(map.state.time),
+        //SwellLayer(map.state.time),
         SiteIconLayers(site => {
           this.zoomToSite(site);
           map.toggleNavMode();
