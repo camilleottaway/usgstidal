@@ -9,7 +9,7 @@ import { ObservationPointLayers } from "./Layers/ObservationPointLayer";
 import { Subscribe } from "unstated";
 import { ManifestService } from "../Services/ManifestService";
 import { Graph } from "../Graph/Graph";
-import { SwellLayer } from './Layers/SwellLayer';
+//import { SwellLayer } from './Layers/SwellLayer';
 import { MapService } from "../Services/MapService";
 //import { ContourLayer } from "./Layers/CountourLayer";
 
@@ -85,7 +85,7 @@ class MapComponent extends Component {
     
     if (map.state.navMode) {
       layers = [
-        SwellLayer(map.state.time),
+        //SwellLayer(map.state.time),
         SiteIconLayers(site => {
           this.zoomToSite(site);
           map.toggleNavMode();
@@ -102,7 +102,7 @@ class MapComponent extends Component {
     
     else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {      
       layers = [        
-        SwellLayer(map.state.time),
+        //SwellLayer(map.state.time),
         //map.state.layers.waveContour && ContourLayer(map.state.time),
         map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
