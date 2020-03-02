@@ -26,6 +26,7 @@ def parse_wind_mat(filepath, NEPoint, SWPoint):
               point["lat"] = x['lat'][i][j]
               point["u"] = parse_helpers.process_float_array(x['u'][i][j].tolist())
               point["v"] = parse_helpers.process_float_array(x['v'][i][j].tolist())
+              point["slp"] = parse_helpers.process_float_array(x['slp'][i][j].tolist())
               data.append(point)  # push the point into our set
           
   return data
