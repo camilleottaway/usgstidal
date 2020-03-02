@@ -31,6 +31,9 @@ parserCatalog = {
     },
     "windobs": {
       ".csv": parse_wind_obs_csv
+    },
+    "areawindpressure": {
+      ".mat": parse_wind_mat
     }
 }
 
@@ -52,6 +55,22 @@ def parsePointLocations(site, workingPath):
 
 
 def parseSpatialSite(site, workingPath):
+  data = {}
+  for file in site['data']:
+    print("    Uploading " + file['fileName'] + " " * (30 - len( file['fileName'])), end='')
+    p = getParser(file['dataType'], file['dataFormat'])
+    path = os.path.join(workingPath, file['fileName'])
+    
+    if os.path.exists(path):      
+      postSiteData(site['id'], file['dataType'], p(path, site['NEpoint'], site['SWpoint']))
+      print(u'\u2713')
+    else:
+      print("Can't find file " + path)
+      print("For site " + site['siteDisplayName'])
+
+  return data
+
+def parseAreaWindPressure(site, workingPath):
   data = {}
   for file in site['data']:
     print("    Uploading " + file['fileName'] + " " * (30 - len( file['fileName'])), end='')
