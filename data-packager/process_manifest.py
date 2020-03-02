@@ -33,6 +33,10 @@ def processManifest(workingPath, apiurl, apikey):
         site['id'] = id
         id += 1
 
+    for site in manifest['AreaWindPressure']:
+        site['id'] = id
+        id += 1
+
     postManifest(manifest)
 
     # For SpatialDomains
@@ -45,5 +49,10 @@ def processManifest(workingPath, apiurl, apikey):
     for site in manifest['PointLocations']:
         print("Parsing Site " + site["siteDisplayName"])
         data_parser.parsePointLocations(site, workingPath)
+
+    print("Starting Global Data parse...")        
+    for site in manifest['AreaWindPressure']:
+        print("Parsing Site " + site["siteDisplayName"])
+        data_parser.parseAreaWindPressure(site, workingPath)
 
     return
