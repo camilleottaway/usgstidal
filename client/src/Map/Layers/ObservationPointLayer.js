@@ -1,5 +1,6 @@
 import {IconLayer, TextLayer } from 'deck.gl';
 
+
 const ICON_MAPPING = { 
   marker: {
     x: 0,
@@ -14,15 +15,15 @@ const ICON_MAPPING = {
 function retrieveIcon (data){
   console.log("hello");
   
-  if (data[0].dataType == "TideObs" || data[0].dataType == "TidePred"){
+  if (data[0].dataType === "TideObs" || data[0].dataType === "TidePred"){
     console.log(data[0].dataType);
     return "/icons_water_level.png"
    }
-   if (data[0].dataType == "WindObs" || data[0].dataType == "WindPred"){
+   if (data[0].dataType === "WindObs" || data[0].dataType === "WindPred"){
     console.log(data[0].dataType);
     return "/icons_wind.png"
    }
-   if (data[0].dataType == "Swell" || data[0].dataType == "Swell"){
+   if (data[0].dataType === "Swell" || data[0].dataType === "Swell"){
     console.log(data[0].dataType);
     return "/icons_swell.png";
    }
@@ -56,21 +57,23 @@ const ObservationPointLayer = (toggleDisplayGraph, data, handleHover) => (
   })
 );
 
+
 const NameLayer = (toggleDisplayGraph, data)=> (
   new TextLayer({
     id: 'text-layer',
+    visible: true,
     pickable: true,
     fontFamily: "'Nunito', sans-serif",
     data,
     //fontFamily: 'Century Gothic, sans-serif',
     getPosition: d => [d.Location[1], d.Location[0]],
     getText: d => d.siteDisplayName,
-    getSize: 32,
+    getSize: 20,
     getTextAnchor: 'middle',
     getAlignmentBaseline: 'bottom',
     getColor: [0, 38, 77],
     onClick: toggleDisplayGraph
-   })
+  })
 );
 
 export const ObservationPointLayers = (pointLocationsSites, toggleDisplayGraph, handleHover)=> 
