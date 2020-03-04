@@ -18,9 +18,11 @@ const getRotatedLine = (source, target, negative)=>{
 
     let px = ox * cs - oy * sn; 
     let py = ox * sn + oy * cs;
-    
+    let d = Math.sqrt(px * px + py * py);
+    px = px / d;
+    py = py / d;
 
-    return [source[0] + py , source[1] + px]
+    return [source[0] + py, source[1] + px]
 }
 
 
