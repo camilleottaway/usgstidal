@@ -22,8 +22,8 @@ if (!ADMINKEY || ADMINKEY === "") {
 //config
 app.use(cors());
 app.use(compression());
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "505mb", extended: true }));
+app.use(bodyParser.json({ limit: "505mb", extended: true }));
 
 //Site data
 //setupManifestDataRoutes(app);
