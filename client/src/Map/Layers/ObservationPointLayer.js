@@ -11,6 +11,30 @@ const ICON_MAPPING = {
   }
 };
 
+<<<<<<< Updated upstream
+=======
+function retrieveIcon (data){
+  // console.log("hello");
+  
+  if (data[0].dataType === "TideObs" || data[0].dataType === "TidePred"){
+    // console.log(data[0].dataType);
+    return "/icons_water_level.png"
+   }
+   if (data[0].dataType === "WindObs" || data[0].dataType === "WindPred"){
+    // console.log(data[0].dataType);
+    return "/icons_wind.png"
+   }
+   if (data[0].dataType === "Swell" || data[0].dataType === "Swell"){
+    // console.log(data[0].dataType);
+    return "/icons_swell.png";
+   }
+   else{
+    return "/icons_wind.png"
+   }
+
+}
+
+>>>>>>> Stashed changes
 const ObservationPointLayer = (toggleDisplayGraph, data, handleHover) => (
   new IconLayer({
     id: "icon-layer",

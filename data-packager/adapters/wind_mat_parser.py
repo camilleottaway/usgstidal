@@ -20,6 +20,7 @@ def parse_wind_mat(filepath, NEPoint, SWPoint):
 
   for i in range(0, len(x['lon'])):
       for j in range(0, len(x['lon'][0])):
+<<<<<<< Updated upstream
           if not math.isnan(x['lat'][i][j]) and not math.isnan(x['lon'][i][j]) and  NEPoint[0] > x['lat'][i][j] > SWPoint[0] and  SWPoint[1] < x['lon'][i][j] < NEPoint[1]: 
               point = {}  # a given point on the map
               point["lon"] = x['lon'][i][j]
@@ -28,4 +29,15 @@ def parse_wind_mat(filepath, NEPoint, SWPoint):
               point["v"] = parse_helpers.process_float_array(x['v'][i][j].tolist())
               data.append(point)  # push the point into our set
           
+=======
+        if not math.isnan(x['lat'][i][j]) and not math.isnan(x['lon'][i][j]) and  NEPoint[0] > x['lat'][i][j] > SWPoint[0] and  SWPoint[1] < x['lon'][i][j] < NEPoint[1]: 
+            point = {}  # a given point on the map
+            point["lon"] = x['lon'][i][j]
+            point["lat"] = x['lat'][i][j]
+            point["u"] = parse_helpers.process_float_array(x['u'][i][j].tolist())
+            point["v"] = parse_helpers.process_float_array(x['v'][i][j].tolist())
+            point["slp"] = parse_helpers.process_float_array(x['slp'][i][j].tolist())
+            data.append(point)  # push the point into our set
+			
+>>>>>>> Stashed changes
   return data

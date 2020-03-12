@@ -19,10 +19,10 @@ export class MapService extends Container {
          state = {
            time: 0,
            layers: {
-             wind: false,
+             wind: true,
              wave: true,
              waveDir: false,
-             pressure: false,
+             pressure: true,
              waveContour: false
            },
            colors: colorRange,
@@ -36,6 +36,7 @@ export class MapService extends Container {
          }
 
          adjustTime(time) {
+
            this.setState({ time });
          }
 

@@ -8,6 +8,12 @@ import moment from 'moment';
 import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
 import { ColorBar } from './ColorBar';
+<<<<<<< Updated upstream
+=======
+import { GlobalToggles } from './GlobalToggles';
+// import { requestPointLocationData } from '../Services/PointLocationData';
+
+>>>>>>> Stashed changes
 
 export class Controls extends Component {
 
@@ -15,6 +21,11 @@ export class Controls extends Component {
     "wind": true,
     "wave": true,
     "pressure": true,
+<<<<<<< Updated upstream
+=======
+    startDate : '',
+    defaultValue: 0,
+>>>>>>> Stashed changes
   }
 
   toggleLayer = (layerName) =>{
@@ -25,11 +36,43 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
+<<<<<<< Updated upstream
     let date = new moment();
     date.add(h, 'h');
     return date.format('MMMM D, YYYY ha');
   }
 
+=======
+    var d = new Date();
+    var n = d.getTimezoneOffset();
+    
+    let date = new moment(this.state.startDate); 
+    date.add(-n, 'm');
+  
+    date.add(h, 'h');
+    return date.format('MMMM D, YYYY ha');
+
+    
+  }
+
+  //Sets the date state, for use in getDateLabel
+  setDate = (manifestDate) => {
+  
+    if(this.state.startDate !== manifestDate){
+      console.log('setting date to: ' + manifestDate);
+      this.setState({startDate : manifestDate});
+      this.setState({defaultValue : Math.abs(new moment() - new moment(manifestDate))})
+    }
+  }
+
+  setStartDate = (manifestDate) => {
+    var diff = new moment() - new moment(manifestDate);
+    diff = diff/3600000;
+    console.log("Calculating startValue: " + diff);
+    return diff;
+  }
+
+>>>>>>> Stashed changes
   render() {
     return (
       <Subscribe to={[MapService]}>
@@ -39,6 +82,10 @@ export class Controls extends Component {
               className="ColorBarPos"
               colors={mapService.state.colors}
             />
+            {/* <GlobalToggles
+              className="GlobalTogglePos"
+              colors={mapService.state.colors}
+            /> */}
             {mapService.state.navMode ? null : (
               <div className="Controls">
                 <div className="exitbtnholder">
@@ -88,18 +135,18 @@ export class Controls extends Component {
                   >
                     Wave Dir.
                   </button>
-                  {/* <button
+                  <button
                     className={
-                      mapService.state.layers.waveContour
+                      mapService.state.layers.pressure
                         ? "layerbtn selected"
                         : "layerbtn"
                     }
                     onClick={() => {
-                      mapService.toggleLayer("waveContour");
+                      mapService.toggleLayer("Pressure");
                     }}
                   >
-                    Wave Con.
-                  </button> */}
+                    Pressure
+                  </button>
                   <Column horizontal="end">
                     <div className="disClock">
                       <Clock format={"MMMM D, YYYY ha"} ticking={true} />
@@ -111,6 +158,11 @@ export class Controls extends Component {
                         <InputRange
                           maxValue={47}
                           minValue={0}
+<<<<<<< Updated upstream
+=======
+                          
+                          // value={mapService.state.time}
+>>>>>>> Stashed changes
                           value={mapService.state.time}
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}

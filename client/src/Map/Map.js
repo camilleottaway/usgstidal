@@ -9,9 +9,14 @@ import { ObservationPointLayers } from "./Layers/ObservationPointLayer";
 import { Subscribe } from "unstated";
 import { ManifestService } from "../Services/ManifestService";
 import { Graph } from "../Graph/Graph";
+<<<<<<< Updated upstream
 import { SwellLayer } from './Layers/SwellLayer';
+=======
+import {requestAreaWindPressureData} from '../Services/PointLocationData';
+//import { SwellLayer } from './Layers/SwellLayer';
+>>>>>>> Stashed changes
 import { MapService } from "../Services/MapService";
-//import { ContourLayer } from "./Layers/CountourLayer";
+import { PressureLayer } from "./Layers/PressureLayer";
 
 // Set your mapbox token here
 const MAPBOX_TOKEN = process.env.REACT_APP_MAP_KEY; // you will need to have this defined in your env! we don't want to check the keys into our public git repo.
@@ -84,6 +89,8 @@ class MapComponent extends Component {
     let layers = [];
     
     if (map.state.navMode) {
+      const temp = requestAreaWindPressureData( "AreaWindPressure" )
+      console.log(temp)
       layers = [
         SwellLayer(map.state.time),
         SiteIconLayers(site => {
@@ -100,10 +107,20 @@ class MapComponent extends Component {
       ];
     }
     
-    else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {      
+    else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {
+      // console.log(manifest.state.currentSiteData.wave)      
+      // console.log(manifest.state.currentSiteData.wind) 
+      console.log(map.state.entSiteData.pressure)     
+      // console.log(manifest.state.currentSiteData.wave)      
       layers = [        
+<<<<<<< Updated upstream
         SwellLayer(map.state.time),
         //map.state.layers.waveContour && ContourLayer(map.state.time),
+=======
+        //SwellLayer(map.state.time),
+        // map.state.layers.waveContour && ContourLayer(map.state.time),
+        map.state.layers.pressure && PressureLayer(map.state.time, manifest.state.currentSiteData.pressure),
+>>>>>>> Stashed changes
         map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
         map.state.layers.waveDir && WaveDirection(manifest.state.currentSiteData.wave, map.state.time),
