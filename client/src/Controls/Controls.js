@@ -8,12 +8,9 @@ import moment from 'moment';
 import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
 import { ColorBar } from './ColorBar';
-<<<<<<< Updated upstream
-=======
 import { GlobalToggles } from './GlobalToggles';
 // import { requestPointLocationData } from '../Services/PointLocationData';
 
->>>>>>> Stashed changes
 
 export class Controls extends Component {
 
@@ -21,11 +18,8 @@ export class Controls extends Component {
     "wind": true,
     "wave": true,
     "pressure": true,
-<<<<<<< Updated upstream
-=======
     startDate : '',
     defaultValue: 0,
->>>>>>> Stashed changes
   }
 
   toggleLayer = (layerName) =>{
@@ -36,13 +30,6 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
-<<<<<<< Updated upstream
-    let date = new moment();
-    date.add(h, 'h');
-    return date.format('MMMM D, YYYY ha');
-  }
-
-=======
     var d = new Date();
     var n = d.getTimezoneOffset();
     
@@ -72,7 +59,6 @@ export class Controls extends Component {
     return diff;
   }
 
->>>>>>> Stashed changes
   render() {
     return (
       <Subscribe to={[MapService]}>
@@ -158,11 +144,8 @@ export class Controls extends Component {
                         <InputRange
                           maxValue={47}
                           minValue={0}
-<<<<<<< Updated upstream
-=======
                           
                           // value={mapService.state.time}
->>>>>>> Stashed changes
                           value={mapService.state.time}
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}

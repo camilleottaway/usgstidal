@@ -9,12 +9,8 @@ import { ObservationPointLayers } from "./Layers/ObservationPointLayer";
 import { Subscribe } from "unstated";
 import { ManifestService } from "../Services/ManifestService";
 import { Graph } from "../Graph/Graph";
-<<<<<<< Updated upstream
-import { SwellLayer } from './Layers/SwellLayer';
-=======
 import {requestAreaWindPressureData} from '../Services/PointLocationData';
 //import { SwellLayer } from './Layers/SwellLayer';
->>>>>>> Stashed changes
 import { MapService } from "../Services/MapService";
 import { PressureLayer } from "./Layers/PressureLayer";
 
@@ -113,14 +109,9 @@ class MapComponent extends Component {
       console.log(map.state.entSiteData.pressure)     
       // console.log(manifest.state.currentSiteData.wave)      
       layers = [        
-<<<<<<< Updated upstream
-        SwellLayer(map.state.time),
-        //map.state.layers.waveContour && ContourLayer(map.state.time),
-=======
         //SwellLayer(map.state.time),
         // map.state.layers.waveContour && ContourLayer(map.state.time),
         map.state.layers.pressure && PressureLayer(map.state.time, manifest.state.currentSiteData.pressure),
->>>>>>> Stashed changes
         map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
         map.state.layers.waveDir && WaveDirection(manifest.state.currentSiteData.wave, map.state.time),

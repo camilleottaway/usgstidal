@@ -11,8 +11,6 @@ const ICON_MAPPING = {
   }
 };
 
-<<<<<<< Updated upstream
-=======
 function retrieveIcon (data){
   // console.log("hello");
   
@@ -34,7 +32,6 @@ function retrieveIcon (data){
 
 }
 
->>>>>>> Stashed changes
 const ObservationPointLayer = (toggleDisplayGraph, data, handleHover) => (
   new IconLayer({
     id: "icon-layer",
