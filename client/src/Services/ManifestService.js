@@ -26,9 +26,6 @@ export class ManifestService extends Container {
           process.env.REACT_APP_API_URL + "/manifest",
           { maxContentLength: 200000 }
         );
-<<<<<<< Updated upstream
-        this.setState({data: response.data})
-=======
 
         // console.log({data: response.data.startDateTime})
     
@@ -39,7 +36,6 @@ export class ManifestService extends Container {
         console.log(response.data.SpatialDomains)
         console.log(response.data.PointLocations)
 
->>>>>>> Stashed changes
         this.setState({ spatialDomainsSites: response.data.SpatialDomains })
         this.setState({ pointLocationsSites: response.data.PointLocations })        
         this.setState({ areaWindPressureSites: response.data.AreaWindPressure })

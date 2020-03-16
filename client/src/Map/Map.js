@@ -88,7 +88,7 @@ class MapComponent extends Component {
       const temp = requestAreaWindPressureData( "AreaWindPressure" )
       console.log(temp)
       layers = [
-        SwellLayer(map.state.time),
+        // SwellLayer(map.state.time),
         SiteIconLayers(site => {
           this.zoomToSite(site);
           map.toggleNavMode();
