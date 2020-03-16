@@ -32,7 +32,7 @@ export class ManifestService extends Container {
         this.setState({ data: response.data})
         this.setState({ date: response.data.startDateTime })
 
-        console.log(response.data.AreaWindPressure)
+        console.log("Pressure response: " + response.data.AreaWindPressure)
         console.log(response.data.SpatialDomains)
         console.log(response.data.PointLocations)
 
@@ -49,19 +49,21 @@ export class ManifestService extends Container {
       const waveResponse = await axios.get(
         process.env.REACT_APP_API_URL + "/getsite/" + siteID + "/Wave"
       );
+      // console.log("Wave response:" + waveResponse)
       const windResponse = await axios.get(
         process.env.REACT_APP_API_URL + "/getsite/" + siteID + "/Wind"
       );    
       const pressureResponse = await axios.get(
         process.env.REACT_APP_API_URL + "/getsite/Global Data" + "/Pressure"
       );    
+      // console.log("Pressure Response:" + pressureResponse)
       this.setState({ currentSiteData: {wave: waveResponse.data, wind: windResponse.data, pressure: pressureResponse.data}, loadingCurrentSite: false });
     }
 
     async requestGlobalData(){
       this.setState({ loadingCurrentSite: true })
       const pressureResponse = await axios.get(
-        process.env.REACT_APP_API_URL + "/Pressure"
+        process.env.REACT_APP_API_URL +  "/getsite/Global Data" + "/Pressure"
       );     
       this.setState({ currentSiteData: {pressure: pressureResponse.data}, loadingCurrentSite: false });
     }

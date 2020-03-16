@@ -86,7 +86,7 @@ class MapComponent extends Component {
     
     if (map.state.navMode) {
       const temp = requestAreaWindPressureData( "AreaWindPressure" )
-      console.log(temp)
+      console.log("Requested awp data: " + temp)
       layers = [
         // SwellLayer(map.state.time),
         SiteIconLayers(site => {
@@ -106,12 +106,12 @@ class MapComponent extends Component {
     else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {
       // console.log(manifest.state.currentSiteData.wave)      
       // console.log(manifest.state.currentSiteData.wind) 
-      console.log(map.state.entSiteData.pressure)     
+      console.log("pressure: " + manifest.state.currentSiteData.pressure)     
       // console.log(manifest.state.currentSiteData.wave)      
       layers = [        
         //SwellLayer(map.state.time),
         // map.state.layers.waveContour && ContourLayer(map.state.time),
-        map.state.layers.pressure && PressureLayer(map.state.time, manifest.state.currentSiteData.pressure),
+        map.state.layers.pressure && PressureLayer(manifest.state.currentSiteData.pressure, map.state.time),
         map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
         map.state.layers.waveDir && WaveDirection(manifest.state.currentSiteData.wave, map.state.time),
