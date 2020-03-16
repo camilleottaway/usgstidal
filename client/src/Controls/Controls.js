@@ -7,8 +7,8 @@ import Clock from 'react-live-clock';
 import moment from 'moment';
 import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
+import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
-import { GlobalToggles } from './GlobalToggles';
 // import { requestPointLocationData } from '../Services/PointLocationData';
 
 
@@ -19,8 +19,8 @@ export class Controls extends Component {
     "wave": true,
     "pressure": true,
     startDate : '',
-    defaultValue: 0,
   }
+
 
   toggleLayer = (layerName) =>{
     //fill out this function.
@@ -30,12 +30,11 @@ export class Controls extends Component {
   }
 
   getDateLabel = (h)=>{
-    var d = new Date();
+    var d = new Date()
     var n = d.getTimezoneOffset();
     
     let date = new moment(this.state.startDate); 
     date.add(-n, 'm');
-  
     date.add(h, 'h');
     return date.format('MMMM D, YYYY ha');
 
@@ -59,10 +58,12 @@ export class Controls extends Component {
     return diff;
   }
 
+
   render() {
     return (
-      <Subscribe to={[MapService]}>
-        {mapService => (
+      <Subscribe to={[ManifestService, MapService]}>
+        {(manifest, mapService) => (
+          
           <div>
             <ColorBar
               className="ColorBarPos"
@@ -74,6 +75,7 @@ export class Controls extends Component {
             /> */}
             {mapService.state.navMode ? null : (
               <div className="Controls">
+                
                 <div className="exitbtnholder">
                   <button
                     className="layerbtn exitbtn"
@@ -135,18 +137,24 @@ export class Controls extends Component {
                   </button>
                   <Column horizontal="end">
                     <div className="disClock">
+                      
                       <Clock format={"MMMM D, YYYY ha"} ticking={true} />
                     </div>
                   </Column>
                   <Column horizontal="center">
                     <Row horizontal="center" vertical="center">
                       <div className="slider">
+
                         <InputRange
+
                           maxValue={47}
                           minValue={0}
                           
                           // value={mapService.state.time}
                           value={mapService.state.time}
+                          
+                          name={this.setDate(manifest.state.date)}
+
                           formatLabel={this.getDateLabel}
                           onChange={value => mapService.adjustTime(value)}
                         />
@@ -162,3 +170,4 @@ export class Controls extends Component {
     );
   }
 }
+

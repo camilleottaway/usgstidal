@@ -15,7 +15,8 @@ export class ManifestService extends Container {
       fetched: false,
       sites: {},
       currentSiteData: {},
-      loadingCurrentSite: false,      
+      loadingCurrentSite: false,    
+      date: '',  
     }
 
 
