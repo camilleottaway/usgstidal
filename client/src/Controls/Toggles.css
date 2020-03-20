@@ -1,0 +1,40 @@
+.Toggles {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 15vh;
+  background-color: white;
+  border: solid #dddddd 1px;
+  border-radius: 6px;
+  padding:10px;
+  width: 110px;
+  
+}
+
+.layerbtn{
+  width: 100px;
+  height: 30px;
+  border:2px solid #003F87;
+
+  border-radius: 6px;
+  border-width: 3px;
+  background-color: transparent;
+  
+  /*border-bottom-color: aquamarine;*/
+  margin-right: 1px;
+  margin-left: 5px;
+  margin-top: 2px;
+  font-weight: bold;
+  color: #003F87;
+}
+
+.selected{
+  background-color: #003F87;
+  border-width: 0px;
+  color: white;
+}
+
+.ToggleArea{
+  background-color: white;
+  height: 100%;  
+}
