@@ -9,6 +9,7 @@ import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
 import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
+import { Toggles } from './Toggles';
 // import { requestPointLocationData } from '../Services/PointLocationData';
 
 
@@ -57,8 +58,6 @@ export class Controls extends Component {
     console.log("Calculating startValue: " + diff);
     return diff;
   }
-
-
   render() {
     return (
       <Subscribe to={[ManifestService, MapService]}>
@@ -69,17 +68,22 @@ export class Controls extends Component {
               className="ColorBarPos"
               colors={mapService.state.colors}
             />
-            {/* <GlobalToggles
-              className="GlobalTogglePos"
+            {<Toggles
+              className="TogglePos"
               colors={mapService.state.colors}
-            /> */}
-            {mapService.state.navMode ? null : (
+            /> }
+
+            
+
+            {(mapService.state.navMode && !(mapService.state.layers.pressure || mapService.state.layers.wind)) ? null:             
+            (
               <div className="Controls">
                 
                 <div className="exitbtnholder">
                   <button
                     className="layerbtn exitbtn"
                     onClick={() => {
+                      mapService.toggleForecastMode();
                       mapService.toggleNavMode();
                     }}
                   >
@@ -87,54 +91,7 @@ export class Controls extends Component {
                   </button>
                 </div>
                 <div className="ControlArea">
-                  <button
-                    className={
-                      mapService.state.layers.wind
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("wind");
-                    }}
-                  >
-                    Wind
-                  </button>
-                  <button
-                    className={
-                      mapService.state.layers.wave
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("wave");
-                    }}
-                  >
-                    Wave
-                  </button>
-                  <button
-                    className={
-                      mapService.state.layers.waveDir
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("waveDir");
-                    }}
-                  >
-                    Wave Dir.
-                  </button>
-                  <button
-                    className={
-                      mapService.state.layers.pressure
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("Pressure");
-                    }}
-                  >
-                    Pressure
-                  </button>
+
                   <Column horizontal="end">
                     <div className="disClock">
                       

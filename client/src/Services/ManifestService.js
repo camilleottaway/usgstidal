@@ -5,17 +5,19 @@ export class ManifestService extends Container {
     constructor(){
       super()
       this.requestData()
+      this.requestGlobalData()
     }
 
     state = {
       data: {},
       spatialDomainsSites: [],
-      areaWindPressureSites: [],
+      pressure: [],
       pointLocationsSites: [],
       fetched: false,
       sites: {},
       currentSiteData: {},
-      loadingCurrentSite: false,    
+      loadingCurrentSite: false,   
+
       date: '',  
     }
 
@@ -33,9 +35,14 @@ export class ManifestService extends Container {
         this.setState({ data: response.data})
         this.setState({ date: response.data.startDateTime })
 
-        console.log("Pressure response: " + response.data.AreaWindPressure)
-        console.log(response.data.SpatialDomains)
-        console.log(response.data.PointLocations)
+        // console.log("Pressure response: " + response.data.AreaWindPressure)
+        // console.log("Spatial response: " + response.data.SpatialDomains)
+        // console.log("Point Locations: " + response.data.PointLocations)
+
+        // console.log("first spatial siteID: " + response.data.SpatialDomains[0])
+
+        // console.log("tide predictions: " + response.data.PointLocations[0].siteDisplayName)
+        // console.log("Pressure: " + response.data.AreaWindPressure[0].siteDisplayName)
 
         this.setState({ spatialDomainsSites: response.data.SpatialDomains })
         this.setState({ pointLocationsSites: response.data.PointLocations })        
@@ -55,18 +62,23 @@ export class ManifestService extends Container {
         process.env.REACT_APP_API_URL + "/getsite/" + siteID + "/Wind"
       );    
       const pressureResponse = await axios.get(
-        process.env.REACT_APP_API_URL + "/getsite/Global Data" + "/Pressure"
-      );    
-      // console.log("Pressure Response:" + pressureResponse)
-      this.setState({ currentSiteData: {wave: waveResponse.data, wind: windResponse.data, pressure: pressureResponse.data}, loadingCurrentSite: false });
+        process.env.REACT_APP_API_URL + "/getsite/-1/areawindpressure"
+      ).then(function(response) {
+        console.log(response);
+      }).catch(function(error) { 
+        console.log(error);
+      });    
+      // console.log("Pressure Response data:" + pressureResponse.data)
+      this.setState({ currentSiteData: {wave: waveResponse.data, wind: windResponse.data}, loadingCurrentSite: false });
     }
 
     async requestGlobalData(){
-      this.setState({ loadingCurrentSite: true })
+      
       const pressureResponse = await axios.get(
-        process.env.REACT_APP_API_URL +  "/getsite/Global Data" + "/Pressure"
+        process.env.REACT_APP_API_URL +  "/getsite/-1/areawindpressure"
       );     
-      this.setState({ currentSiteData: {pressure: pressureResponse.data}, loadingCurrentSite: false });
+      this.setState({pressure: pressureResponse.data} );
+
     }
 
 }

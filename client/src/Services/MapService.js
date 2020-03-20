@@ -19,13 +19,14 @@ export class MapService extends Container {
          state = {
            time: 0,
            layers: {
-             wind: true,
+             wind: false,
              wave: true,
              waveDir: false,
-             pressure: true,
+             pressure: false,
              waveContour: false
            },
            colors: colorRange,
+           forecastMode: false,
            navMode: true
          };
 
@@ -41,6 +42,12 @@ export class MapService extends Container {
          }
 
          toggleNavMode() {
+
            this.setState({ navMode: !this.state.navMode });
+           
+         }
+
+         toggleForecastMode() {
+           this.setState({ forecastMode: !this.state.forecastMode });
          }
        }

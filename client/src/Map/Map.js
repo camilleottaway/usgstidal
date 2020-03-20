@@ -85,33 +85,40 @@ class MapComponent extends Component {
     let layers = [];
     
     if (map.state.navMode) {
-      const temp = requestAreaWindPressureData( "AreaWindPressure" )
-      console.log("Requested awp data: " + temp)
-      layers = [
-        // SwellLayer(map.state.time),
-        SiteIconLayers(site => {
-          this.zoomToSite(site);
-          map.toggleNavMode();
-          manifest.requestSiteData(site.object.id);
-        }, 
-        manifest.state.spatialDomainsSites),
-        ObservationPointLayers(
-          manifest.state.pointLocationsSites,
-          this.toggleDisplayGraph,
-          this.handleMouseObsHover
-        )
-      ];
+      // const temp = requestAreaWindPressureData( "AreaWindPressure" )
+      // console.log("Requested awp data: " + temp)    
+      // console.log("point locations: " + manifest.state.pointLocationsSites);
+
+      // manifest.requestGlobalData()
+      // console.log("Pressure properties = " + Object.getOwnPropertyNames(manifest.state.pressure))
+        layers = [
+          // SwellLayer(map.state.time),
+          map.state.pressure && PressureLayer(manifest.state.pressure, map.state.pressure),
+          SiteIconLayers(site => {
+            this.zoomToSite(site);
+            map.toggleNavMode();
+            
+            manifest.requestSiteData(site.object.id);
+          }, 
+          manifest.state.spatialDomainsSites),
+          ObservationPointLayers(
+            manifest.state.pointLocationsSites,
+            this.toggleDisplayGraph,
+            this.handleMouseObsHover
+          )
+        ];
     }
     
+
     else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {
       // console.log(manifest.state.currentSiteData.wave)      
       // console.log(manifest.state.currentSiteData.wind) 
-      console.log("pressure: " + manifest.state.currentSiteData.pressure)     
-      // console.log(manifest.state.currentSiteData.wave)      
+      // console.log(manifest.state.currentSiteData.pressure)     
+      // console.log(manifest.state.currentSiteData.wave)
+    
       layers = [        
         //SwellLayer(map.state.time),
         // map.state.layers.waveContour && ContourLayer(map.state.time),
-        map.state.layers.pressure && PressureLayer(manifest.state.currentSiteData.pressure, map.state.time),
         map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
         map.state.layers.waveDir && WaveDirection(manifest.state.currentSiteData.wave, map.state.time),

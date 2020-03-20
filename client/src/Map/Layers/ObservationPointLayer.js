@@ -13,23 +13,9 @@ const ICON_MAPPING = {
 };
 
 function retrieveIcon (data){
-<<<<<<< HEAD
   // console.log("hello");
   
   if (data[0].dataType === "TideObs" || data[0].dataType === "TidePred"){
-    // console.log(data[0].dataType);
-    return "/icons_water_level.png"
-   }
-   if (data[0].dataType === "WindObs" || data[0].dataType === "WindPred"){
-    // console.log(data[0].dataType);
-    return "/icons_wind.png"
-   }
-   if (data[0].dataType === "Swell" || data[0].dataType === "Swell"){
-    // console.log(data[0].dataType);
-=======
-  console.log("hello");
-  
-  if (data[0].dataType === "TideObs" || data[0].dataType === "TidePred"){
     console.log(data[0].dataType);
     return "/icons_water_level.png"
    }
@@ -39,7 +25,6 @@ function retrieveIcon (data){
    }
    if (data[0].dataType === "Swell" || data[0].dataType === "Swell"){
     console.log(data[0].dataType);
->>>>>>> 63bf63e1374413d2475ff4e557efdcf92b66f49b
     return "/icons_swell.png";
    }
    else{
