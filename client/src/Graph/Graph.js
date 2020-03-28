@@ -20,11 +20,6 @@ export const Graph = ({ x, y, action, site }) => {
       style={{ left: x - offset, top: y - offset }}
       className="popup_container"
     >
-
-    <button className="popup_button" onClick={action}>
-        X
-    </button>
-    
     <Popup
       trigger={
         <button onClick={() => {}} className="popup_button">
@@ -33,19 +28,12 @@ export const Graph = ({ x, y, action, site }) => {
       }
       modal
     >
-      {close => (
-        <div className="modal">
-          <span className="close" onClick={close}>
-            &times;
-          </span>
-          <div className="header">Water Graph: Total Water Level & NTR</div>
-          <div className="content">
-            <div className="graph_container">
-              <WaterGraph site={site}></WaterGraph>
-            </div>
-          </div>
+      <div className="header">Water Graph: Total Water Level & NTR</div>
+      <div className="content">
+        <div className="graph_container">
+          <WaterGraph site={site}></WaterGraph>
         </div>
-      )}
+      </div>
     </Popup>
     </div>
   );

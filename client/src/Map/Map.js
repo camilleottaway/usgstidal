@@ -8,9 +8,12 @@ import { SiteIconLayers } from "./Layers/SiteIconLayer";
 import { ObservationPointLayers } from "./Layers/ObservationPointLayer";
 import { Subscribe } from "unstated";
 import { ManifestService } from "../Services/ManifestService";
-import { Graph } from "../Graph/Graph";
+//import { Graph } from "../Graph/Graph";
 import { SwellLayer } from './Layers/SwellLayer';
 import { MapService } from "../Services/MapService";
+import Popup from "reactjs-popup";
+import { WaterGraph } from "../Graph/WaterGraph";
+
 //import { ContourLayer } from "./Layers/CountourLayer";
 
 // Set your mapbox token here
@@ -52,7 +55,7 @@ class MapComponent extends Component {
   };
 
   // displaying a graph in the popup
-  toggleDisplayGraph = (site) => {
+  toggleDisplayGraph = () => {
     this.setState({ displayGraph: !this.state.displayGraph });
   };
 
@@ -82,25 +85,41 @@ class MapComponent extends Component {
 
   getLayers = (manifest, map) => {
     let layers = [];
-    
+    let icon = "";
     if (map.state.navMode) {
-      layers = [
-        SwellLayer(map.state.time),
-        SiteIconLayers(site => {
-          this.zoomToSite(site);
-          map.toggleNavMode();
-          manifest.requestSiteData(site.object.id);
-        }, 
-        manifest.state.spatialDomainsSites),
-        ObservationPointLayers(
-          manifest.state.pointLocationsSites,
-          this.toggleDisplayGraph,
-          this.handleMouseObsHover
-        )
-      ];
-    }
-    
-    else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {      
+      for (let i = 0; i < manifest.state.pointLocationsSites.length; i++){
+        if (manifest.state.pointLocationsSites[0] !== undefined) {
+          switch (manifest.state.pointLocationsSites[i].data[0].dataType){
+            case "TidePred":
+              icon = "/icons_water_level.png";
+              break;
+            case "WindObs":
+              icon = "/icons_wind.png";
+              break;
+            default:
+              console.log("unknown observation type ", manifest.state.pointLocationsSites[i].data[0].dataType);
+              break;
+          }
+          console.log(manifest.state.pointLocationsSites[i], "\n", icon)
+          layers = [
+            SwellLayer(map.state.time),
+            SiteIconLayers(site => {
+              this.zoomToSite(site);
+              map.toggleNavMode();
+              manifest.requestSiteData(site.object.id);
+            }, 
+            manifest.state.spatialDomainsSites),
+
+            ObservationPointLayers(
+              manifest.state.pointLocationsSites,
+              this.toggleDisplayGraph,
+              this.handleMouseObsHover,
+              icon
+            )
+          ];
+        }
+      }
+    } else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {      
       layers = [        
         SwellLayer(map.state.time),
         //map.state.layers.waveContour && ContourLayer(map.state.time),
@@ -110,18 +129,26 @@ class MapComponent extends Component {
       ];
     }
     return layers;
-  };
+  }; 
 
   render() {
     return (
       <div>
         {this.state.displayGraph ? (
-          <Graph
-            action={this.closeGraph}
-            x={this.state.x}
-            y={this.state.y}
-            site={this.state.hoveredObject}
-          />
+          <div>
+        <Popup
+          trigger={<span></span>}
+          open={this.state.displayGraph}
+          modal
+        >
+          <div className="header">Water Graph: Total Water Level & NTR</div>
+          <div className="content">
+            <div className="graph_container">
+              <WaterGraph site={this.state.hoveredObject}></WaterGraph>
+            </div>
+          </div>
+        </Popup>
+        </div>
         ) : null}
 
         <DeckGL

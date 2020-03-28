@@ -4,24 +4,24 @@ const ICON_MAPPING = {
   marker: {
     x: 0,
     y: 0,
-    width: 128,
-    height: 128,
+    width: 700,
+    height: 600,
     anchorY: 155,
-    mask: true
+    mask: false
   }
 };
 
-const ObservationPointLayer = (toggleDisplayGraph, data, handleHover) => (
+const ObservationPointLayer = (toggleDisplayGraph, data, handleHover, icon) => (
   new IconLayer({
     id: "icon-layer",
     data,
     pickable: true,
-    iconAtlas: "/location-icon-atlas.png",
+    iconAtlas: icon,
     iconMapping: ICON_MAPPING,
     sizeScale: 15,
     getPosition: d => [d.Location[1], d.Location[0]],
     getIcon: d => "marker",
-    getSize: d => 5,
+    getSize: d => 3.5,
     getColor: [153, 204, 255],//[27, 39, 170],
     onClick: toggleDisplayGraph,
     onHover: handleHover,
@@ -46,10 +46,10 @@ const NameLayer = (toggleDisplayGraph, data)=> (
    })
 );
 
-export const ObservationPointLayers = (pointLocationsSites, toggleDisplayGraph, handleHover)=> 
+export const ObservationPointLayers = (pointLocationsSites, toggleDisplayGraph, handleHover, icon)=> 
 (
   [
-    ObservationPointLayer(toggleDisplayGraph, pointLocationsSites, handleHover), 
+    ObservationPointLayer(toggleDisplayGraph, pointLocationsSites, handleHover, icon), 
     NameLayer(toggleDisplayGraph, pointLocationsSites)
   ]
 );
