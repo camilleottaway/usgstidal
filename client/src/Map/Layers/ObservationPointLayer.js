@@ -5,52 +5,25 @@ const ICON_MAPPING = {
   marker: {
     x: 0,
     y: 0,
-    width: 800,
+    width: 700,
     height: 600,
     anchorY: 155,
     mask: false
   }
 };
 
-function retrieveIcon (data){
-  console.log("hello");
-  
-  if (data[0].dataType === "TideObs" || data[0].dataType === "TidePred"){
-    console.log(data[0].dataType);
-    return "/icons_water_level.png"
-   }
-   if (data[0].dataType === "WindObs" || data[0].dataType === "WindPred"){
-    console.log(data[0].dataType);
-    return "/icons_wind.png"
-   }
-   if (data[0].dataType === "Swell" || data[0].dataType === "Swell"){
-    console.log(data[0].dataType);
-    return "/icons_swell.png";
-   }
-   else{
-    return "/icons_wind.png"
-   }
-
-}
-
-const ObservationPointLayer = (toggleDisplayGraph, data, handleHover) => (
+const ObservationPointLayer = (toggleDisplayGraph, data, handleHover, icon) => (
   new IconLayer({
     id: "icon-layer",
     data,
     pickable: true,
-    //iconAtlas: "/icons_water_level.png" ,
-    //iconMapping: ICON_MAPPING,
+    iconAtlas: icon,
+    iconMapping: ICON_MAPPING,
     sizeScale: 15,
     getPosition: d => [d.Location[1], d.Location[0]],
-    //getIcon: d => "marker",
-    getIcon: d => ({
-      url: retrieveIcon(d.data),
-      width: 800,
-      height: 600,
-      anchorY: 155
-    }),
-    getSize: d => 4,
-    //getColor: [27, 39, 170],//[153, 204, 255],//
+    getIcon: d => "marker",
+    getSize: d => 3.5,
+    getColor: [153, 204, 255],//[27, 39, 170],
     onClick: toggleDisplayGraph,
     onHover: handleHover,
     clickRadius: 30
@@ -76,10 +49,10 @@ const NameLayer = (toggleDisplayGraph, data)=> (
   })
 );
 
-export const ObservationPointLayers = (pointLocationsSites, toggleDisplayGraph, handleHover)=> 
+export const ObservationPointLayers = (pointLocationsSites, toggleDisplayGraph, handleHover, icon)=> 
 (
   [
-    ObservationPointLayer(toggleDisplayGraph, pointLocationsSites, handleHover), 
+    ObservationPointLayer(toggleDisplayGraph, pointLocationsSites, handleHover, icon), 
     NameLayer(toggleDisplayGraph, pointLocationsSites)
   ]
 );
