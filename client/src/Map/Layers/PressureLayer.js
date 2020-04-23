@@ -74,22 +74,32 @@ function getColorValue(ft, colorRange) {
 
 const waveScale = .035;
 
-export const PressureLayer = (data, currentTime) => 
+export const PressureLayer = (data , currentTime) => 
   new GridCellLayer({
     id: "pressure",
     data: data,
+    // data:[
+    //   {latlong: [48.663, -122.5603], value: 1000},
+    // ], 
     cellSize: 110,
     extruded: false,
     getPosition: x => {
-      return [x[0], x[1], 0];      
+      console.log("x lat/lon:" + x.lat + x.lon);
+      return [x.lat, x.lon, 0];
+      // return [x[0], x[1], 0];      
     },
     getColor: x => {
-      if (x[3][currentTime]) {
-        var ftVal = 3.2808 * x[3][currentTime];
-        return getColorValue(ftVal, colorRange);
-      } else { 
-        return [0,0,0,0]
-      }
+      console.log("getColor ");
+      return [1,0,0,0];
+      
+      // if (x[3][currentTime]) {
+
+      //   var ftVal = 3.2808 * x[3][currentTime]; //TODO: May need to change this later
+
+      //   return getColorValue(ftVal, colorRange);
+      // } else { 
+      //   return [0,0,0,0]
+      // }
     },
     parameters: {
       depthTest: false

@@ -93,7 +93,7 @@ class MapComponent extends Component {
       // console.log("Pressure properties = " + Object.getOwnPropertyNames(manifest.state.pressure))
         layers = [
           // SwellLayer(map.state.time),
-          map.state.pressure && PressureLayer(manifest.state.pressure, map.state.pressure),
+          // map.state.pressure && PressureLayer(manifest.state.pressure, map.state.pressure),
           SiteIconLayers(site => {
             this.zoomToSite(site);
             map.toggleNavMode();
@@ -115,11 +115,13 @@ class MapComponent extends Component {
       // console.log(manifest.state.currentSiteData.wind) 
       // console.log(manifest.state.currentSiteData.pressure)     
       // console.log(manifest.state.currentSiteData.wave)
-    
+      // console.log("pressure object: "+ manifest.state.pressure)
       layers = [        
         //SwellLayer(map.state.time),
         // map.state.layers.waveContour && ContourLayer(map.state.time),
-        map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
+        
+        map.state.layers.pressure && PressureLayer(manifest.state.pressure, map.state.time),
+        map.state.layers.wind && WindLayer(manifest.state.currentSiteData.wind, map.state.time),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
         map.state.layers.waveDir && WaveDirection(manifest.state.currentSiteData.wave, map.state.time),
       ];

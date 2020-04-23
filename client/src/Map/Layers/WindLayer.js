@@ -17,19 +17,19 @@ function getColor(min, max, value) {
 }
 
 
-export const WindLayer = (currentTime, data)=>{
+export const WindLayer = (data, currentTime)=>{
   console.log(data);
   return ArrowLayer({
-            id: 'wind',
-            data: data,
-            getWidth: 3,
-            getSourcePosition: x => [x.lon, x.lat],
-            getTargetPosition: x => [x.lon + (x.u[currentTime] * windScale), x.lat + (x.v[currentTime] * windScale)],
-            getColor: x => getColor(0, 25, Math.abs(x.v[currentTime]) + Math.abs(x.u[currentTime])),
-            updateTriggers: {              
-              getTargetPosition: currentTime,
-              getSourcePosition: currentTime,
-              getColor: currentTime,
-            },
-        });
+    id: 'wind',
+    data: data,
+    getWidth: 3,
+    getSourcePosition: x => [x.lon, x.lat],
+    getTargetPosition: x => [x.lon + (x.u[currentTime] * windScale), x.lat + (x.v[currentTime] * windScale)],
+    getColor: x => getColor(0, 25, Math.abs(x.v[currentTime]) + Math.abs(x.u[currentTime])),
+    updateTriggers: {              
+      getTargetPosition: currentTime,
+      getSourcePosition: currentTime,
+      getColor: currentTime,
+    },
+});
 }
