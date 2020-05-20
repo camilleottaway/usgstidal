@@ -35,6 +35,9 @@ parserCatalog = {
     "areawindpressure": {
       ".mat": parse_wind_mat
     }
+    "bounds": {
+      ".bnd": parse_spatial_domain_bnd
+    }
 }
 
 def parsePointLocations(site, workingPath):
@@ -60,9 +63,18 @@ def parseSpatialSite(site, workingPath):
     print("    Uploading " + file['fileName'] + " " * (30 - len( file['fileName'])), end='')
     p = getParser(file['dataType'], file['dataFormat'])
     path = os.path.join(workingPath, file['fileName'])
+    boundspath = os.path.join(workingPath, file['boundsFile'])
+    boundsp = getParser("Bounds", ".bnd")
+
+    if os.path.exists(boundspath):      
+      bounds =  p(boundspath)
+      print(u'\u2713')
+    else:
+      print("Can't find bounds file " + path)
+      print("For site " + site['siteDisplayName'])
     
     if os.path.exists(path):      
-      postSiteData(site['id'], file['dataType'], p(path, site['NEpoint'], site['SWpoint']))
+      postSiteData(site['id'], file['dataType'], p(path, bounds))
       print(u'\u2713')
     else:
       print("Can't find file " + path)
