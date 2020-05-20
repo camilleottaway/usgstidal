@@ -7,7 +7,7 @@ from . import parse_helpers
 
 windsamplesize = 5;
 
-def parse_wave_mat(filepath, NEPoint, SWPoint):
+def parse_wave_mat(filepath, bounds):
   # hs - significant wave height, abbreviated as Hsig or H_sig most often. Units are meters. 1
   # tm - Mean wave period, abbrev is Tm typically. units seconds 1
   # dp - Mean wave direction [deg], you can use to create arrows 1

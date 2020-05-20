@@ -11,6 +11,7 @@ from adapters.water_pred_csv_parser import parse_water_pred_csv
 from adapters.water_obs_csv_parser import parse_water_obs_csv
 from adapters.wind_pred_csv_parser import parse_wind_pred_csv
 from adapters.wind_obs_csv_parser import parse_wind_obs_csv 
+from adapters.spatial_domain_bnd_parser import parse_spatial_domain_bnd
 
 # dictionary of supported parsers.
 parserCatalog = {
@@ -34,7 +35,7 @@ parserCatalog = {
     },
     "areawindpressure": {
       ".mat": parse_wind_mat
-    }
+    },
     "bounds": {
       ".bnd": parse_spatial_domain_bnd
     }
@@ -59,19 +60,22 @@ def parsePointLocations(site, workingPath):
 
 def parseSpatialSite(site, workingPath):
   data = {}
+  bounds = {}
+
+  boundspath = os.path.join(workingPath, site['boundsFile'])
+  boundsp = getParser("Bounds", ".bnd")
+
+  if os.path.exists(boundspath):      
+    bounds =  boundsp(boundspath)
+    print(u'\u2713')
+  else:
+    print("Can't find bounds file " + boundspath)
+    print("For site " + site['siteDisplayName'])
+
   for file in site['data']:
     print("    Uploading " + file['fileName'] + " " * (30 - len( file['fileName'])), end='')
     p = getParser(file['dataType'], file['dataFormat'])
     path = os.path.join(workingPath, file['fileName'])
-    boundspath = os.path.join(workingPath, file['boundsFile'])
-    boundsp = getParser("Bounds", ".bnd")
-
-    if os.path.exists(boundspath):      
-      bounds =  p(boundspath)
-      print(u'\u2713')
-    else:
-      print("Can't find bounds file " + path)
-      print("For site " + site['siteDisplayName'])
     
     if os.path.exists(path):      
       postSiteData(site['id'], file['dataType'], p(path, bounds))
