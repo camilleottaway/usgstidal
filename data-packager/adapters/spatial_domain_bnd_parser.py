@@ -18,8 +18,7 @@ def parse_spatial_domain_bnd(filepath):
       point = line.split(", ")
       lat = float(point[0])
       lon = float(point[1])
-      point = (lat, lon)
+      point = [lat, lon]
       data.append(point)  # push the point into our set
-    i+=1;
-          
+    i+=1;      
   return data

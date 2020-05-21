@@ -78,7 +78,7 @@ def parseSpatialSite(site, workingPath):
     path = os.path.join(workingPath, file['fileName'])
     
     if os.path.exists(path):      
-      postSiteData(site['id'], file['dataType'], p(path, bounds))
+      postSiteData(site['id'], file['dataType'], p(path, site['NEpoint'], site['SWpoint'],  bounds))
       print(u'\u2713')
     else:
       print("Can't find file " + path)

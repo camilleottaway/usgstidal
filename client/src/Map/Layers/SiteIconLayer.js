@@ -34,14 +34,7 @@ const boxlayer = (data, zoomToSite) =>
     getLineColor: [80, 80, 80],
     getLineWidth: 1,
     pickingRadius: 5,
-    getPolygon: x => {
-      return [
-        [x.NEpoint[1], x.NEpoint[0], 0],
-        [x.NEpoint[1], x.SWpoint[0], 0],
-        [x.SWpoint[1], x.SWpoint[0], 0],
-        [x.SWpoint[1], x.NEpoint[0], 0]
-      ];
-    },
+    getPolygon: x => x.bounds,
     onClick: d => {
       zoomToSite(d);
     }
