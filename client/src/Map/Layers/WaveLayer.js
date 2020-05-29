@@ -72,7 +72,7 @@ function getColorValue(ft, colorRange) {
   }
 }
 
-const waveScale = .006;
+const waveScale = .035;
 
 export const WaveDirection = (data, currentTime) =>
   new ArrowLayer({
@@ -85,17 +85,12 @@ export const WaveDirection = (data, currentTime) =>
     getTargetPosition: x => {
       if (x[2][currentTime]) {
         var cart_theta =
-          //((90 - x[2][currentTime]) * Math.PI )/ 180;
-          //TODO: Check with Sean and see why this equation is used
           ((90 - x[2][currentTime] + 180) * Math.PI) / 180;
-        //var hs_x = x[3][currentTime] * Math.cos(cart_theta);
-        //var hs_y = x[3][currentTime] * Math.sin(cart_theta);
-        var hs_x = waveScale * Math.cos(cart_theta);
-        var hs_y = waveScale * Math.sin(cart_theta);
-
+        var hs_x = x[3][currentTime] * Math.cos(cart_theta);
+        var hs_y = x[3][currentTime] * Math.sin(cart_theta);
         return [
-          x[0] + hs_x,
-          x[1] + hs_y,
+          x[0] + hs_x * waveScale,
+          x[1] + hs_y * waveScale,
           1
         ];
       } else {
