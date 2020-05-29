@@ -7,19 +7,20 @@ const getRotatedLine = (source, target, negative)=>{
     const oy = (target[0] - source[0]) *scaler;
     const ox = (target[1] - source[1]) *scaler;
 
-    var theta = .1;
+    let theta = .1;
 
     if (negative){
         theta = theta * -1;
     }
 
-    var cs = Math.cos(theta);
-    var sn = Math.sin(theta);
+    let cs = Math.cos(theta);
+    let sn = Math.sin(theta);
 
-    var px = ox * cs - oy * sn; 
-    var py = ox * sn + oy * cs;
+    let px = ox * cs - oy * sn; 
+    let py = ox * sn + oy * cs;
+    
 
-    return [source[0] + py, source[1] + px]
+    return [source[0] + py , source[1] + px]
 }
 
 
