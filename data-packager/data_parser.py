@@ -67,6 +67,7 @@ def parseSpatialSite(site, workingPath):
 
   if os.path.exists(boundspath):      
     bounds =  boundsp(boundspath)
+    #print(bounds)
     print(u'\u2713')
   else:
     print("Can't find bounds file " + boundspath)
@@ -80,6 +81,7 @@ def parseSpatialSite(site, workingPath):
     if os.path.exists(path):      
       postSiteData(site['id'], file['dataType'], p(path, site['NEpoint'], site['SWpoint'],  bounds))
       print(u'\u2713')
+      print(site['boundsFile'])
     else:
       print("Can't find file " + path)
       print("For site " + site['siteDisplayName'])
