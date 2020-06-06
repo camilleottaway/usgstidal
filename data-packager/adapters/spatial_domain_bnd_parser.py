@@ -14,11 +14,12 @@ def parse_spatial_domain_bnd(filepath):
   i = 0
   for line in x:
     
-    if(i > 0):
+    if(i > 0 ):
       point = line.split(", ")
       lat = float(point[0])
       lon = float(point[1])
-      point = [lat, lon]
+      point = [lon, lat, 0]
       data.append(point)  # push the point into our set
-    i+=1;      
+    i+=1
+  #print(data)    
   return data
