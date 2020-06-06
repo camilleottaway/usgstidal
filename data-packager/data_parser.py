@@ -62,16 +62,16 @@ def parseSpatialSite(site, workingPath):
   data = {}
   bounds = {}
 
-  boundspath = os.path.join(workingPath, site['boundsFile'])
-  boundsp = getParser("Bounds", ".bnd")
+  # boundspath = os.path.join(workingPath, site['boundsFile'])
+  # boundsp = getParser("Bounds", ".bnd")
 
-  if os.path.exists(boundspath):      
-    bounds =  boundsp(boundspath)
-    #print(bounds)
-    print(u'\u2713')
-  else:
-    print("Can't find bounds file " + boundspath)
-    print("For site " + site['siteDisplayName'])
+  # if os.path.exists(boundspath):      
+  #   bounds =  boundsp(boundspath)
+  #   #print(bounds)
+  #   print(u'\u2713')
+  # else:
+  #   print("Can't find bounds file " + boundspath)
+  #   print("For site " + site['siteDisplayName'])
 
   for file in site['data']:
     print("    Uploading " + file['fileName'] + " " * (30 - len( file['fileName'])), end='')
@@ -81,7 +81,6 @@ def parseSpatialSite(site, workingPath):
     if os.path.exists(path):      
       postSiteData(site['id'], file['dataType'], p(path, site['NEpoint'], site['SWpoint'],  bounds))
       print(u'\u2713')
-      print(site['boundsFile'])
     else:
       print("Can't find file " + path)
       print("For site " + site['siteDisplayName'])
