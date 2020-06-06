@@ -57,6 +57,19 @@ export class AboutView extends Component {
           egrossman@usgs.gov
           <br />
         </p>
+        <h3> 2020 WWU CS Student Development Team</h3>
+
+        <p className="Text">
+          Brian Alverez
+          <br />
+          Chloe Dawson
+          <br />
+          Jay Olsen
+          <br />
+          Camille Ottaway
+          <br />
+        </p>
+
         <h3> 2019 WWU CS Student Development Team</h3>
 
         <p className="Text">
