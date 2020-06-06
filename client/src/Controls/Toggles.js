@@ -16,7 +16,7 @@ export const Toggles = (props) => {
       
         <div className="Toggles">
         
-            <button
+            {/* <button
               className={
                 MapService.state.layers.wind
                   ? "layerbtn selected"
@@ -42,7 +42,7 @@ export const Toggles = (props) => {
               }}
             >
             Pressure
-            </button>    
+            </button>     */}
             {MapService.state.navMode ? null : (
               <div className="ToggleArea">
                 <button

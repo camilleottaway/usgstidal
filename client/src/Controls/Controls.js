@@ -80,7 +80,6 @@ export class Controls extends Component {
               <div className="Controls">
                 
                 <div className="exitbtnholder">
-                  // TODO: Move close button to a more noticable place
                   <button
                     className="layerbtn exitbtn"
                     onClick={() => {
