@@ -100,7 +100,7 @@ class MapComponent extends Component {
               console.log("unknown observation type ", manifest.state.pointLocationsSites[i].data[0].dataType);
               break;
           }
-          console.log(manifest.state.pointLocationsSites[i], "\n", icon)
+          console.log(manifest.state.pointLocationsSites[i], "\n", icon);
           layers = [
             SwellLayer(map.state.time),
             SiteIconLayers(site => {
@@ -119,7 +119,7 @@ class MapComponent extends Component {
           ];
         }
       }
-    } else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {      
+    } else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {   
       layers = [        
         //SwellLayer(map.state.time),
         //map.state.layers.waveContour && ContourLayer(map.state.time),
