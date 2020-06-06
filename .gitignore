@@ -15,3 +15,7 @@ package-lock.json
 package-lock.json
 client/package-lock.json
 client/package-lock.json
+<<<<<<< HEAD
+.vscode/settings.json
+=======
+>>>>>>> 63bf63e1374413d2475ff4e557efdcf92b66f49b

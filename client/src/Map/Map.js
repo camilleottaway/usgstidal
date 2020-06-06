@@ -9,9 +9,10 @@ import { ObservationPointLayers } from "./Layers/ObservationPointLayer";
 import { Subscribe } from "unstated";
 import { ManifestService } from "../Services/ManifestService";
 import { Graph } from "../Graph/Graph";
+import {requestAreaWindPressureData} from '../Services/PointLocationData';
 //import { SwellLayer } from './Layers/SwellLayer';
 import { MapService } from "../Services/MapService";
-//import { ContourLayer } from "./Layers/CountourLayer";
+import { PressureLayer } from "./Layers/PressureLayer";
 
 // Set your mapbox token here
 const MAPBOX_TOKEN = process.env.REACT_APP_MAP_KEY; // you will need to have this defined in your env! we don't want to check the keys into our public git repo.
@@ -84,27 +85,43 @@ class MapComponent extends Component {
     let layers = [];
     
     if (map.state.navMode) {
-      layers = [
-        //SwellLayer(map.state.time),
-        SiteIconLayers(site => {
-          this.zoomToSite(site);
-          map.toggleNavMode();
-          manifest.requestSiteData(site.object.id);
-        }, 
-        manifest.state.spatialDomainsSites),
-        ObservationPointLayers(
-          manifest.state.pointLocationsSites,
-          this.toggleDisplayGraph,
-          this.handleMouseObsHover
-        )
-      ];
+      // const temp = requestAreaWindPressureData( "AreaWindPressure" )
+      // console.log("Requested awp data: " + temp)    
+      // console.log("point locations: " + manifest.state.pointLocationsSites);
+
+      // manifest.requestGlobalData()
+      // console.log("Pressure properties = " + Object.getOwnPropertyNames(manifest.state.pressure))
+        layers = [
+          // SwellLayer(map.state.time),
+          // map.state.pressure && PressureLayer(manifest.state.pressure, map.state.pressure),
+          SiteIconLayers(site => {
+            this.zoomToSite(site);
+            map.toggleNavMode();
+            
+            manifest.requestSiteData(site.object.id);
+          }, 
+          manifest.state.spatialDomainsSites),
+          ObservationPointLayers(
+            manifest.state.pointLocationsSites,
+            this.toggleDisplayGraph,
+            this.handleMouseObsHover
+          )
+        ];
     }
     
-    else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {      
+
+    else if (!manifest.state.loadingCurrentSite && manifest.state.currentSiteData) {
+      // console.log(manifest.state.currentSiteData.wave)      
+      // console.log(manifest.state.currentSiteData.wind) 
+      // console.log(manifest.state.currentSiteData.pressure)     
+      // console.log(manifest.state.currentSiteData.wave)
+      // console.log("pressure object: "+ manifest.state.pressure)
       layers = [        
         //SwellLayer(map.state.time),
-        //map.state.layers.waveContour && ContourLayer(map.state.time),
-        map.state.layers.wind && WindLayer(map.state.time, manifest.state.currentSiteData.wind),
+        // map.state.layers.waveContour && ContourLayer(map.state.time),
+        
+        map.state.layers.pressure && PressureLayer(manifest.state.pressure, map.state.time),
+        map.state.layers.wind && WindLayer(manifest.state.currentSiteData.wind, map.state.time),
         map.state.layers.wave && WaveLayer(manifest.state.currentSiteData.wave, map.state.time),
         map.state.layers.waveDir && WaveDirection(manifest.state.currentSiteData.wave, map.state.time),
       ];

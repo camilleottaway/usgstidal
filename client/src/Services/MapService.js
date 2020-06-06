@@ -26,6 +26,7 @@ export class MapService extends Container {
              waveContour: false
            },
            colors: colorRange,
+           forecastMode: false,
            navMode: true
          };
 
@@ -36,10 +37,17 @@ export class MapService extends Container {
          }
 
          adjustTime(time) {
+
            this.setState({ time });
          }
 
          toggleNavMode() {
+
            this.setState({ navMode: !this.state.navMode });
+           
+         }
+
+         toggleForecastMode() {
+           this.setState({ forecastMode: !this.state.forecastMode });
          }
        }
