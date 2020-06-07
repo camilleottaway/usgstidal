@@ -9,6 +9,7 @@ import { Subscribe} from 'unstated';
 import { MapService } from '../Services/MapService';
 import { ManifestService } from "../Services/ManifestService";
 import { ColorBar } from './ColorBar';
+import { Toggles } from './Toggles';
 // import { requestPointLocationData } from '../Services/PointLocationData';
 
 
@@ -35,7 +36,6 @@ export class Controls extends Component {
     
     let date = new moment(this.state.startDate); 
     date.add(-n, 'm');
-
     date.add(h, 'h');
     return date.format('MMMM D, YYYY ha');
 
@@ -48,10 +48,16 @@ export class Controls extends Component {
     if(this.state.startDate !== manifestDate){
       console.log('setting date to: ' + manifestDate);
       this.setState({startDate : manifestDate});
+      this.setState({defaultValue : Math.abs(new moment() - new moment(manifestDate))})
     }
   }
 
-
+  setStartDate = (manifestDate) => {
+    var diff = new moment() - new moment(manifestDate);
+    diff = diff/3600000;
+    console.log("Calculating startValue: " + diff);
+    return diff;
+  }
   render() {
     return (
       <Subscribe to={[ManifestService, MapService]}>
@@ -62,13 +68,22 @@ export class Controls extends Component {
               className="ColorBarPos"
               colors={mapService.state.colors}
             />
-            {mapService.state.navMode ? null : (
+            {<Toggles
+              className="TogglePos"
+              colors={mapService.state.colors}
+            /> }
+
+            
+
+            {(mapService.state.navMode && !(mapService.state.layers.pressure || mapService.state.layers.wind)) ? null:             
+            (
               <div className="Controls">
                 
                 <div className="exitbtnholder">
                   <button
                     className="layerbtn exitbtn"
                     onClick={() => {
+                      mapService.toggleForecastMode();
                       mapService.toggleNavMode();
                     }}
                   >
@@ -76,54 +91,7 @@ export class Controls extends Component {
                   </button>
                 </div>
                 <div className="ControlArea">
-                  <button
-                    className={
-                      mapService.state.layers.wind
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("wind");
-                    }}
-                  >
-                    Wind
-                  </button>
-                  <button
-                    className={
-                      mapService.state.layers.wave
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("wave");
-                    }}
-                  >
-                    Wave
-                  </button>
-                  <button
-                    className={
-                      mapService.state.layers.waveDir
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("waveDir");
-                    }}
-                  >
-                    Wave Dir.
-                  </button>
-                  {/* <button
-                    className={
-                      mapService.state.layers.waveContour
-                        ? "layerbtn selected"
-                        : "layerbtn"
-                    }
-                    onClick={() => {
-                      mapService.toggleLayer("waveContour");
-                    }}
-                  >
-                    Wave Con.
-                  </button> */}
+
                   <Column horizontal="end">
                     <div className="disClock">
                       
@@ -138,7 +106,8 @@ export class Controls extends Component {
 
                           maxValue={47}
                           minValue={0}
-
+                          
+                          // value={mapService.state.time}
                           value={mapService.state.time}
                           
                           name={this.setDate(manifest.state.date)}
