@@ -64,7 +64,7 @@ export class AboutView extends Component {
           <br />
           Chloe Dawson
           <br />
-          Jay Olsen
+          Jay Olson
           <br />
           Camille Ottaway
           <br />
