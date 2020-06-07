@@ -117,14 +117,13 @@ export const WaveLayer = (data, currentTime) =>
     cellSize: 110,
     extruded: false,
     getPosition: x => {
-      return [x[0], x[1], 0];
+      return [x[0], x[1], 0];      
     },
     getColor: x => {
       if (x[3][currentTime]) {
         var ftVal = 3.2808 * x[3][currentTime];
-        
         return getColorValue(ftVal, colorRange);
-      } else {
+      } else { 
         return [0,0,0,0]
       }
     },

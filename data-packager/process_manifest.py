@@ -34,7 +34,7 @@ def processManifest(workingPath, apiurl, apikey):
         id += 1
 
     for site in manifest['AreaWindPressure']:
-        site['id'] = -1
+        site['id'] = id
         id += 1
 
     postManifest(manifest)

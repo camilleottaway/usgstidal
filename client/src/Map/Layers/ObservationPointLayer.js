@@ -13,7 +13,7 @@ const ICON_MAPPING = {
 };
 
 function retrieveIcon (data){
-  // console.log("hello");
+  console.log("hello");
   
   if (data[0].dataType === "TideObs" || data[0].dataType === "TidePred"){
     console.log(data[0].dataType);
