@@ -39,7 +39,7 @@ const boxlayer = (data, zoomToSite) =>
     wireframe: true,
     lineWidthMinPixels: 2,
     getFillColor: d => [0, 0, 0, 0,],
-    getLineColor: [0, 0, 0, 0],
+    getLineColor: [80, 80, 80],
     getLineWidth: 1,
     pickingRadius: 5,
     //getPolygon: x => retrieveBounds(x),
